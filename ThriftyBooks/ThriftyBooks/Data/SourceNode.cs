@@ -9,11 +9,11 @@ namespace ThriftyBooks.Data
     {
         SourceNode next;
 
-        String sourceName;
+        string sourceName;
         double price;
-        String link;
+        string link;
 
-        public SourceNode(String sourceName, double price, String link)
+        public SourceNode(string sourceName, double price, string link)
         {
             this.sourceName = sourceName;
             this.price = price;
@@ -25,7 +25,7 @@ namespace ThriftyBooks.Data
             return next;
         }
 
-        public String getSourceName()
+        public string getSourceName()
         {
             return sourceName;
         }
@@ -35,7 +35,7 @@ namespace ThriftyBooks.Data
             return price;
         }
 
-        public String getLink()
+        public string getLink()
         {
             return link;
         }
@@ -45,7 +45,7 @@ namespace ThriftyBooks.Data
             this.next = next;
         }
 
-        public void setSourceName(String sourceName)
+        public void setSourceName(string sourceName)
         {
             this.sourceName = sourceName;
         }
@@ -55,7 +55,7 @@ namespace ThriftyBooks.Data
             this.price = price;
         }
 
-        public void setLink(String link)
+        public void setLink(string link)
         {
             this.link = link;
         }

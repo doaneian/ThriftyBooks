@@ -10,8 +10,10 @@
     <center>
     <form id="form1" runat="server">
     <div style="height: 173px; width: 253px">
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" Text="Search" />
+        <asp:TextBox ID="txtbxSearchTerm" runat="server"></asp:TextBox>
+        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="SearchEvent" />
+        <asp:Table ID="tblRent" runat="server" Height="30px" Width="180px">
+        </asp:Table>
     </div>
     </form>
     </center>

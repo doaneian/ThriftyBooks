@@ -87,7 +87,9 @@
     <Compile Include="ResultsSearch\APICalling\APIs\APIDemo.cs" />
     <Compile Include="ResultsSearch\ValidateSearchTerm.cs" />
     <Compile Include="ResultsSearch\Search.cs" />
-    <Compile Include="Tables\TableBuilder.cs" />
+    <Compile Include="Tables\TableBuilder.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ThriftyBooks.aspx.cs">
       <DependentUpon>ThriftyBooks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -95,6 +97,7 @@
     <Compile Include="ThriftyBooks.aspx.designer.cs">
       <DependentUpon>ThriftyBooks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ThriftyBooksEnums.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

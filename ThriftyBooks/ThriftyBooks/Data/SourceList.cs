@@ -48,7 +48,7 @@ namespace ThriftyBooks.Data
             return false;
         }
 
-        public void insertNode(String sourceName, double price, String link)
+        public void insertNode(string sourceName, double price, string link)
         {
             SourceNode pointer = head;
             while(pointer.getNext() != null)
