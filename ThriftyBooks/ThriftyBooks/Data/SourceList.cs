@@ -35,12 +35,12 @@ namespace ThriftyBooks.Data
         //such as commission rates, we can easily add them here.
         public bool comesAfterNode(SourceNode insert, SourceNode current)
         {
-            if(current.getNext() == null)
+            if(current == head)
             {
-                return true;
+                return false;
             }
 
-            if (insert.getPrice() <= current.getNext().getPrice())
+            if (insert.getPrice() <= current.getPrice())
             {
                 return true;
             }
@@ -55,14 +55,15 @@ namespace ThriftyBooks.Data
 
             while (pointer.getNext() != null)
             { 
-                pointer = pointer.getNext();
-                if(comesAfterNode(insertNode, pointer))
+                if(comesAfterNode(insertNode, pointer.getNext()))
                 {
                     SourceNode temp = pointer.getNext();
                     pointer.setNext(insertNode);
                     pointer.getNext().setNext(temp);
                     return;
-                }    
+                }
+
+                pointer = pointer.getNext();
             }
 
             pointer.setNext(insertNode);
