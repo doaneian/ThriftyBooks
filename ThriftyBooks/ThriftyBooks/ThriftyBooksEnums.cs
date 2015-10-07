@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ThriftyBooks.Tables
+namespace ThriftyBooksEnums
 {
-    public class Row
-    {
-    }
+    public enum condition { eRent = 0, eUsed, eNew };
 }

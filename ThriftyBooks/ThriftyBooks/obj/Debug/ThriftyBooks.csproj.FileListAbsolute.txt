@@ -18,3 +18,23 @@ E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\bi
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.csprojResolveAssemblyReference.cache
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.dll
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.pdb
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\csc.exe
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\vbc.exe
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll.config
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.pdb
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.csprojResolveAssemblyReference.cache
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.dll
+C:\Users\Owner\Kathy\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.pdb

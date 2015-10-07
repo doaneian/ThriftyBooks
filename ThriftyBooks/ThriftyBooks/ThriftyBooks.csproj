@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
@@ -79,14 +79,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\SourceNode.cs" />
+    <Compile Include="Data\SourceList.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultsSearch\APICalling\APICaller.cs" />
     <Compile Include="ResultsSearch\APICalling\APIs\APIDemo.cs" />
     <Compile Include="ResultsSearch\ValidateSearchTerm.cs" />
     <Compile Include="ResultsSearch\Search.cs" />
-    <Compile Include="Tables\Row.cs" />
-    <Compile Include="Tables\TableBuilder.cs" />
+    <Compile Include="Tables\TableBuilder.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ThriftyBooks.aspx.cs">
       <DependentUpon>ThriftyBooks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -94,6 +97,7 @@
     <Compile Include="ThriftyBooks.aspx.designer.cs">
       <DependentUpon>ThriftyBooks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ThriftyBooksEnums.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -111,7 +115,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3977</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3977/</IISUrl>
+          <IISUrl>http://localhost:3977/ThriftyBooks</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

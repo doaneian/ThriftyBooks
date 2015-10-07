@@ -12,7 +12,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost/ThriftyBooks/ThriftyBooks.aspx</StartExternalURL>
+          <StartExternalURL>http://localhost:3977/ThriftyBooks/ThriftyBooks.aspx</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>
