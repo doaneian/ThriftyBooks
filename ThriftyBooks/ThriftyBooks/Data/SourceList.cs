@@ -7,7 +7,7 @@ namespace ThriftyBooks.Data
 {
     public class SourceList
     {
-        SourceNode head;
+        SourceNode head = new SourceNode("", 0, "");
 
         public SourceNode getNode(int index)
         {

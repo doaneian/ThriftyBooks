@@ -9,7 +9,7 @@ namespace ThriftyBooks
 {
     public partial class ThriftyBooks : System.Web.UI.Page
     {
-        Main mainProcessor;
+        Main mainProcessor = new Main();
 
         protected void Page_Load(object sender, EventArgs e)
         {
