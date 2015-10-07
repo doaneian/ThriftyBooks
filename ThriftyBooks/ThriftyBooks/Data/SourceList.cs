@@ -33,7 +33,7 @@ namespace ThriftyBooks.Data
 
         //I created this function so that when we add more criteria to determining what sources come in what order,
         //such as commission rates, we can easily add them here.
-        public Boolean comesAfterNode(SourceNode insert, SourceNode current)
+        public bool comesAfterNode(SourceNode insert, SourceNode current)
         {
             if(current.getNext() == null)
             {
@@ -51,19 +51,21 @@ namespace ThriftyBooks.Data
         public void insertNode(string sourceName, double price, string link)
         {
             SourceNode pointer = head;
-            while(pointer.getNext() != null)
-            {
-                SourceNode insertNode = new SourceNode(sourceName, price, link);
-                pointer = pointer.getNext();
+            SourceNode insertNode = new SourceNode(sourceName, price, link);
 
+            while (pointer.getNext() != null)
+            { 
+                pointer = pointer.getNext();
                 if(comesAfterNode(insertNode, pointer))
                 {
                     SourceNode temp = pointer.getNext();
                     pointer.setNext(insertNode);
                     pointer.getNext().setNext(temp);
-                    break;
+                    return;
                 }    
             }
+
+            pointer.setNext(insertNode);
         }
 
         public void deleteList()

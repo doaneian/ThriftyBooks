@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using ThriftyBooks.Data;
 using ThriftyBooks.ResultsSearch;
+using ThriftyBooks.Tables;
+using ThriftyBooksEnums;
 
 namespace ThriftyBooks
 {
@@ -21,6 +23,14 @@ namespace ThriftyBooks
 
             Search search = new Search();
             search.getResults();
+
+            insertInitialResultsIntoTables();
+        }
+
+        public void insertInitialResultsIntoTables()
+        {
+            TableBuilder builder = new TableBuilder();
+            builder.buildTable((int) condition.eRent);
         }
 
         public void resetLists()

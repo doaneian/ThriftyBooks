@@ -10,30 +10,33 @@ namespace ThriftyBooks.Tables
 {
     public class TableBuilder : ThriftyBooks
     {
-        public void expandNewTable(ref SourceList newList)
+        public void expandNewTable()
         {
 
         }
 
-        public void expandUsedTable(ref SourceList usedList)
+        public void expandUsedTable()
         {
 
         }
 
-        public void expandRentTable(ref SourceList rentList)
+        public void expandRentTable()
         {
 
         }
 
-        public void expandTable(ref SourceList bookList, int type)
+        public void expandTable(int type)
         {
 
         }
 
-        public void buildRentTable(ref SourceList rentList)
+        public void buildRentTable()
         {
+            tblRent = new Table();
+
             TableCell source = new TableCell();
-            source.Text = rentList.getNode(1).getSourceName();
+            SourceNode node = Main.rentList.getNode(1);
+            source.Text = Main.rentList.getNode(1).getSourceName();
 
             TableRow trow = new TableRow();
             trow.Cells.Add(source);
@@ -41,31 +44,31 @@ namespace ThriftyBooks.Tables
             tblRent.Rows.Add(trow);
         }
 
-        public void buildUsedTable(ref SourceList usedList)
+        public void buildUsedTable()
         {
 
         }
 
-        public void buildNewTable(ref SourceList newList)
+        public void buildNewTable()
         {
 
         }
 
-        public void buildTable(ref SourceList bookList, int type)
+        public void buildTable(int type)
         {
             if(type == (int) condition.eRent)
             {
-                buildRentTable(ref bookList);
+                buildRentTable();
             }
 
             if (type == (int) condition.eUsed)
             {
-                buildUsedTable(ref bookList);
+                buildUsedTable();
             }
 
             if (type == (int) condition.eNew)
             {
-                buildNewTable(ref bookList);
+                buildNewTable();
             }
         }
     }
