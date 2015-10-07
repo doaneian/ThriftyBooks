@@ -6,9 +6,9 @@ using System.Web.UI.WebControls;
 using ThriftyBooks.Data;
 using ThriftyBooksEnums;
 
-namespace ThriftyBooks.Tables
+namespace ThriftyBooks
 {
-    public class TableBuilder : ThriftyBooks
+    public partial class ThriftyBooks : System.Web.UI.Page
     {
         public void expandNewTable()
         {
@@ -32,26 +32,101 @@ namespace ThriftyBooks.Tables
 
         public void buildRentTable()
         {
-            tblRent = new Table();
-
-            TableCell source = new TableCell();
             SourceNode node = Main.rentList.getNode(1);
-            source.Text = Main.rentList.getNode(1).getSourceName();
+
+            TableRow tHeaderRow = new TableRow();
+            tblRent.Controls.Add(tHeaderRow);
+
+            TableCell header = new TableCell();
+            header.Text = "Rentals";
+            header.BorderStyle = BorderStyle.Solid;
+            header.BorderWidth = Unit.Pixel(1);
+            header.ColumnSpan = 2;
+            header.HorizontalAlign = HorizontalAlign.Center;
+            header.Font.Size = FontUnit.Point(20);
+            tHeaderRow.Controls.Add(header);
 
             TableRow trow = new TableRow();
-            trow.Cells.Add(source);
+            tblRent.Controls.Add(trow);
 
-            tblRent.Rows.Add(trow);
+            TableCell source = new TableCell();
+            source.Text = node.getSourceName();
+            source.BorderStyle = BorderStyle.Solid;
+            source.BorderWidth = Unit.Pixel(1);
+            trow.Controls.Add(source);
+
+            TableCell price = new TableCell();
+            price.Text = "$" + node.getPrice();
+            price.BorderStyle = BorderStyle.Solid;
+            price.BorderWidth = Unit.Pixel(1);
+            price.HorizontalAlign = HorizontalAlign.Right;
+            trow.Controls.Add(price);
         }
 
         public void buildUsedTable()
         {
+            SourceNode node = Main.usedList.getNode(1);
 
+            TableRow tHeaderRow = new TableRow();
+            tblUsed.Controls.Add(tHeaderRow);
+
+            TableCell header = new TableCell();
+            header.Text = "Used";
+            header.BorderStyle = BorderStyle.Solid;
+            header.BorderWidth = Unit.Pixel(1);
+            header.ColumnSpan = 2;
+            header.HorizontalAlign = HorizontalAlign.Center;
+            header.Font.Size = FontUnit.Point(20);
+            tHeaderRow.Controls.Add(header);
+
+            TableRow trow = new TableRow();
+            tblUsed.Controls.Add(trow);
+
+            TableCell source = new TableCell();
+            source.Text = node.getSourceName();
+            source.BorderStyle = BorderStyle.Solid;
+            source.BorderWidth = Unit.Pixel(1);
+            trow.Controls.Add(source);
+
+            TableCell price = new TableCell();
+            price.Text = "$" + node.getPrice();
+            price.BorderStyle = BorderStyle.Solid;
+            price.BorderWidth = Unit.Pixel(1);
+            price.HorizontalAlign = HorizontalAlign.Right;
+            trow.Controls.Add(price);
         }
 
         public void buildNewTable()
         {
+            SourceNode node = Main.newList.getNode(1);
 
+            TableRow tHeaderRow = new TableRow();
+            tblNew.Controls.Add(tHeaderRow);
+
+            TableCell header = new TableCell();
+            header.Text = "New";
+            header.BorderStyle = BorderStyle.Solid;
+            header.BorderWidth = Unit.Pixel(1);
+            header.ColumnSpan = 2;
+            header.HorizontalAlign = HorizontalAlign.Center;
+            header.Font.Size = FontUnit.Point(20);
+            tHeaderRow.Controls.Add(header);
+
+            TableRow trow = new TableRow();
+            tblNew.Controls.Add(trow);
+
+            TableCell source = new TableCell();
+            source.Text = node.getSourceName();
+            source.BorderStyle = BorderStyle.Solid;
+            source.BorderWidth = Unit.Pixel(1);
+            trow.Controls.Add(source);
+
+            TableCell price = new TableCell();
+            price.Text = "$" + node.getPrice();
+            price.BorderStyle = BorderStyle.Solid;
+            price.BorderWidth = Unit.Pixel(1);
+            price.HorizontalAlign = HorizontalAlign.Right;
+            trow.Controls.Add(price);
         }
 
         public void buildTable(int type)

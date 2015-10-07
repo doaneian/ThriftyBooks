@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using ThriftyBooks.Data;
 using ThriftyBooks.ResultsSearch;
-using ThriftyBooks.Tables;
 using ThriftyBooksEnums;
 
 namespace ThriftyBooks
@@ -16,6 +15,13 @@ namespace ThriftyBooks
         public static SourceList newList;
         
         public static int ISBN;
+
+        public ThriftyBooks formHandler;
+
+        public Main(ThriftyBooks formHandler)
+        {
+            this.formHandler = formHandler;
+        }
 
         public void ProcessSearchTerm()
         {
@@ -29,8 +35,9 @@ namespace ThriftyBooks
 
         public void insertInitialResultsIntoTables()
         {
-            TableBuilder builder = new TableBuilder();
-            builder.buildTable((int) condition.eRent);
+            formHandler.buildTable((int) condition.eRent);
+            formHandler.buildTable((int) condition.eUsed);
+            formHandler.buildTable((int) condition.eNew);
         }
 
         public void resetLists()
