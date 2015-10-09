@@ -12,9 +12,19 @@ namespace ThriftyBooks
     {
         Main mainProcessor;
 
+        public Main getMain()
+        {
+            if (mainProcessor == null)
+            {
+                mainProcessor = new Main(this);
+            }
+
+            return mainProcessor;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //refreshAllTables();
         }
 
         protected void SearchEvent(object sender, EventArgs e)
@@ -25,6 +35,11 @@ namespace ThriftyBooks
             }
 
             mainProcessor.ProcessSearchTerm();
+        }
+
+        protected void btnExpandUsed(object sender, EventArgs e)
+        {
+            getMain().expandUsedTable();
         }
     }
 }

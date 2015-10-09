@@ -40,30 +40,12 @@ namespace ThriftyBooks {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// tblRent control.
+        /// btnExpandUsed2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblRent;
-        
-        /// <summary>
-        /// tblUsed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblUsed;
-        
-        /// <summary>
-        /// tblNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblNew;
+        protected global::System.Web.UI.WebControls.Button btnExpandUsed2;
     }
 }

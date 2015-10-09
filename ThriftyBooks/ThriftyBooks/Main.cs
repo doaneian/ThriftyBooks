@@ -15,6 +15,7 @@ namespace ThriftyBooks
         public static SourceList newList;
         
         public static int ISBN;
+        public static int[] tableStatus = new int[3] { 0, 0, 0 };
 
         public ThriftyBooks formHandler;
 
@@ -60,6 +61,11 @@ namespace ThriftyBooks
             rentList.deleteList();
             usedList.deleteList();
             newList.deleteList();
+        }
+
+        public void expandUsedTable()
+        {
+            formHandler.expandUsedTable();
         }
     }
 }
