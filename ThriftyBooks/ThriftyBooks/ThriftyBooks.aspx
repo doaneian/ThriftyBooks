@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+    <link href="ThriftyBooksStyleSheet.css" rel="stylesheet" type="text/css" />
 <head runat="server" aria-checked="false">
     <title></title>
     </head>
@@ -13,9 +14,9 @@
         <asp:TextBox ID="txtbxSearchTerm" runat="server" style="margin-bottom: 20px"></asp:TextBox>
         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="SearchEvent" style="margin-bottom: 20px"/>
         <br />
-        <asp:Button ID="btnExpandRent2" runat="server" OnClick="btnExpandRent" Text="See more" Visible ="false"/>
+        <asp:Button ID="btnExpandRent2" runat="server" OnClick="btnExpandRent" Text="See more" Visible ="false" style="margin-bottom: 20px"/>
         <br />
-        <asp:Button ID="btnExpandUsed2" runat="server" OnClick="btnExpandUsed" Text="See more" Visible ="false"/>
+        <asp:Button ID="btnExpandUsed2" runat="server" OnClick="btnExpandUsed" Text="See more" Visible ="false" style="margin-bottom: 20px"/>
         <br />
         <asp:Button ID="btnExpandNew2" runat="server" OnClick="btnExpandNew" Text="See more" Visible ="false"/>
     </div>

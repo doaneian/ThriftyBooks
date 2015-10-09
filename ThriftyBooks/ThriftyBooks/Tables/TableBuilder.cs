@@ -81,7 +81,8 @@ namespace ThriftyBooks
         {
             Table table = getTable(type);
             table = new Table();
-            table.Visible = true;
+            setTableStyle(table);
+
             btnExpandRent2.Visible = true;
             btnExpandUsed2.Visible = true;
             btnExpandNew2.Visible = true;
@@ -101,8 +102,8 @@ namespace ThriftyBooks
         {
             Table table = getTable(type);
             table = new Table();
+            setTableStyle(table);
 
-            table.Visible = true;
             btnExpandRent2.Visible = true;
             btnExpandUsed2.Visible = true;
             btnExpandNew2.Visible = true;
@@ -143,7 +144,7 @@ namespace ThriftyBooks
             }
             if (type == (int)condition.eUsed)
             {
-                form1.Controls.AddAt(7, table);
+                form1.Controls.AddAt(8, table);
             }
             if (type == (int)condition.eNew)
             {
@@ -199,7 +200,12 @@ namespace ThriftyBooks
             trow.Controls.Add(source);
 
             TableCell price = new TableCell();
-            price.Text = "$" + node.getPrice();
+            HyperLink link = new HyperLink();
+            link.NavigateUrl = node.getLink();
+            link.Text = node.getPrice().ToString("C");
+            link.Target = "_blank";
+            price.Controls.Add(link);
+
             setPriceCellStyle(price);
             trow.Controls.Add(price);
         }
@@ -224,17 +230,26 @@ namespace ThriftyBooks
             return null;
         }
 
+        public void setTableStyle(Table table)
+        {
+            table.CellSpacing = 0;
+            table.Visible = true;
+            table.CellPadding = 5;
+            table.Width = 200;
+        }
+
         public void setSourceCellStyle(TableCell source)
         {
             source.BorderStyle = BorderStyle.Solid;
             source.BorderWidth = Unit.Pixel(1);
+            source.Height = 60;
         }
 
         public void setPriceCellStyle(TableCell price)
         {
             price.BorderStyle = BorderStyle.Solid;
             price.BorderWidth = Unit.Pixel(1);
-            price.HorizontalAlign = HorizontalAlign.Right;
+            price.HorizontalAlign = HorizontalAlign.Center;
         }
     }
 }
