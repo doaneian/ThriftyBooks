@@ -236,10 +236,5 @@ namespace ThriftyBooks
             price.BorderWidth = Unit.Pixel(1);
             price.HorizontalAlign = HorizontalAlign.Right;
         }
-
-        public void addButton(int type)
-        {
-        }
-
     }
 }
