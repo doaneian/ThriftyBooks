@@ -24,7 +24,6 @@ namespace ThriftyBooks
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //refreshAllTables();
         }
 
         protected void SearchEvent(object sender, EventArgs e)
@@ -37,9 +36,19 @@ namespace ThriftyBooks
             mainProcessor.ProcessSearchTerm();
         }
 
+        protected void btnExpandRent(object sender, EventArgs e)
+        {
+            getMain().expandRentTable();
+        }
+
         protected void btnExpandUsed(object sender, EventArgs e)
         {
             getMain().expandUsedTable();
+        }
+
+        protected void btnExpandNew(object sender, EventArgs e)
+        {
+            getMain().expandNewTable();
         }
     }
 }

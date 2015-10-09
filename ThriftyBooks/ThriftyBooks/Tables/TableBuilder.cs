@@ -58,6 +58,8 @@ namespace ThriftyBooks
 
         public void expandNewTable()
         {
+            refreshTable((int)condition.eRent);
+            refreshTable((int)condition.eUsed);
             expandTable((int)condition.eNew);
         }
 
@@ -71,6 +73,8 @@ namespace ThriftyBooks
         public void expandRentTable()
         {
             expandTable((int)condition.eRent);
+            refreshTable((int)condition.eUsed);
+            refreshTable((int)condition.eNew);
         }
 
         public void expandTable(int type)
@@ -78,6 +82,9 @@ namespace ThriftyBooks
             Table table = getTable(type);
             table = new Table();
             table.Visible = true;
+            btnExpandRent2.Visible = true;
+            btnExpandUsed2.Visible = true;
+            btnExpandNew2.Visible = true;
 
             setTableHeader(type, table);
             for (int i = 1; i <= 3; i++)
@@ -85,7 +92,8 @@ namespace ThriftyBooks
                 insertDataRow(i, type, table);
             }
 
-            form1.Controls.Add(table);
+            addTableToForm(type, table);
+
             Main.tableStatus[type] = (int) tableStatusCode.eExpanded;
         }
 
@@ -93,12 +101,17 @@ namespace ThriftyBooks
         {
             Table table = getTable(type);
             table = new Table();
+
             table.Visible = true;
+            btnExpandRent2.Visible = true;
+            btnExpandUsed2.Visible = true;
+            btnExpandNew2.Visible = true;
 
             setTableHeader(type, table);
             insertDataRow(1, type, table);
 
-            form1.Controls.Add(table);
+            addTableToForm(type, table);
+
             Main.tableStatus[type] = (int)tableStatusCode.eInitial;
         }
 
@@ -120,6 +133,22 @@ namespace ThriftyBooks
             }
 
             return null;
+        }
+
+        public void addTableToForm(int type, Table table)
+        {
+            if (type == (int)condition.eRent)
+            {
+                form1.Controls.AddAt(5, table);
+            }
+            if (type == (int)condition.eUsed)
+            {
+                form1.Controls.AddAt(7, table);
+            }
+            if (type == (int)condition.eNew)
+            {
+                form1.Controls.AddAt(11, table);
+            }
         }
 
         public void setTableHeader(int type, Table table)
@@ -206,6 +235,10 @@ namespace ThriftyBooks
             price.BorderStyle = BorderStyle.Solid;
             price.BorderWidth = Unit.Pixel(1);
             price.HorizontalAlign = HorizontalAlign.Right;
+        }
+
+        public void addButton(int type)
+        {
         }
 
     }

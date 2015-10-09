@@ -63,9 +63,19 @@ namespace ThriftyBooks
             newList.deleteList();
         }
 
+        public void expandRentTable()
+        {
+            formHandler.expandRentTable();
+        }
+
         public void expandUsedTable()
         {
             formHandler.expandUsedTable();
+        }
+
+        public void expandNewTable()
+        {
+            formHandler.expandNewTable();
         }
     }
 }
