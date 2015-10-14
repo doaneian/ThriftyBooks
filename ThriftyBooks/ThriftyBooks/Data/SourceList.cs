@@ -7,7 +7,7 @@ namespace ThriftyBooks.Data
 {
     public class SourceList
     {
-        SourceNode head;
+        SourceNode head = new SourceNode("", 0, "");
 
         public SourceNode getNode(int index)
         {
@@ -33,14 +33,14 @@ namespace ThriftyBooks.Data
 
         //I created this function so that when we add more criteria to determining what sources come in what order,
         //such as commission rates, we can easily add them here.
-        public Boolean comesAfterNode(SourceNode insert, SourceNode current)
+        public bool comesAfterNode(SourceNode insert, SourceNode current)
         {
-            if(current.getNext() == null)
+            if(current == head)
             {
-                return true;
+                return false;
             }
 
-            if (insert.getPrice() <= current.getNext().getPrice())
+            if (insert.getPrice() <= current.getPrice())
             {
                 return true;
             }
@@ -51,19 +51,22 @@ namespace ThriftyBooks.Data
         public void insertNode(string sourceName, double price, string link)
         {
             SourceNode pointer = head;
-            while(pointer.getNext() != null)
-            {
-                SourceNode insertNode = new SourceNode(sourceName, price, link);
-                pointer = pointer.getNext();
+            SourceNode insertNode = new SourceNode(sourceName, price, link);
 
-                if(comesAfterNode(insertNode, pointer))
+            while (pointer.getNext() != null)
+            { 
+                if(comesAfterNode(insertNode, pointer.getNext()))
                 {
                     SourceNode temp = pointer.getNext();
                     pointer.setNext(insertNode);
                     pointer.getNext().setNext(temp);
-                    break;
-                }    
+                    return;
+                }
+
+                pointer = pointer.getNext();
             }
+
+            pointer.setNext(insertNode);
         }
 
         public void deleteList()
