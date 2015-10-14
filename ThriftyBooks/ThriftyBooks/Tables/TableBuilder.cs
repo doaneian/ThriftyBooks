@@ -10,10 +10,6 @@ namespace ThriftyBooks
 {
     public partial class ThriftyBooks : System.Web.UI.Page
     {
-        Table tblRentTemp;
-        Table tblUsedTemp;
-        Table tblNewTemp;
-
         public void refreshAllTables()
         {
             refreshRentTable();
@@ -23,15 +19,12 @@ namespace ThriftyBooks
 
         public void refreshTable(int type)
         {
-            Table table = getTable(type);
-
             if (Main.tableStatus[type] == (int)tableStatusCode.eInitial)
             {
                 buildTable(type);
             }
             else if (Main.tableStatus[type] == (int)tableStatusCode.eExpanded)
             {
-                table = new Table();
                 expandTable(type);
             }
         }
@@ -49,11 +42,6 @@ namespace ThriftyBooks
         public void refreshRentTable()
         {
             refreshTable((int)condition.eRent);
-        }
-
-        public void removeTable(int type)
-        {
-            form1.Controls.Remove(getTable(type));
         }
 
         public void expandNewTable()
@@ -79,8 +67,7 @@ namespace ThriftyBooks
 
         public void expandTable(int type)
         {
-            Table table = getTable(type);
-            table = new Table();
+            Table table = new Table();
             setTableStyle(table);
 
             btnExpandRent2.Visible = true;
@@ -100,8 +87,7 @@ namespace ThriftyBooks
 
         public void buildTable(int type)
         {
-            Table table = getTable(type);
-            table = new Table();
+            Table table = new Table();
             setTableStyle(table);
 
             btnExpandRent2.Visible = true;
@@ -114,26 +100,6 @@ namespace ThriftyBooks
             addTableToForm(type, table);
 
             Main.tableStatus[type] = (int)tableStatusCode.eInitial;
-        }
-
-        public Table getTable(int type)
-        {
-            if (type == (int)condition.eRent)
-            {
-                return tblRentTemp;
-            }
-
-            if (type == (int)condition.eUsed)
-            {
-                return tblUsedTemp;
-            }
-
-            if (type == (int)condition.eNew)
-            {
-                return tblNewTemp;
-            }
-
-            return null;
         }
 
         public void addTableToForm(int type, Table table)
