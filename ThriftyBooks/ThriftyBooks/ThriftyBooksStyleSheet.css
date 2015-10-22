@@ -1,5 +1,7 @@
 ﻿body {
-
+    margin:0 auto;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
 }
 
 Table {

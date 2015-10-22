@@ -8,9 +8,17 @@
     <title>Thrifty Books</title>
     </head>
 <body style="height: 264px">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <center>
     <form id="form1" runat="server">
-    <div style="height: 80px; font-size: 60px; cursor: default">Thrifty Books</div>
     <div style="height: 241px; width: 253px" id="searchDiv">
         <asp:TextBox ID="txtbxSearchTerm" runat="server" style="margin-bottom: 20px"></asp:TextBox>
         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="SearchEvent" style="margin-bottom: 20px"/>

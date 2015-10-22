@@ -202,6 +202,7 @@ namespace ThriftyBooks
             table.Visible = true;
             table.CellPadding = 5;
             table.Width = 200;
+            table.BackColor = System.Drawing.Color.White;
         }
 
         public void setSourceCellStyle(TableCell source)
