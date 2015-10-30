@@ -37,10 +37,12 @@ a{
  }
  
   #title{
-	 font-size:27px;
-	 position: absolute;
-	 top: 30px;
-	 left: 120px;
+	font-weight: bold;
+    font-size: 27px;
+    position: absolute;
+    top: 30px;
+    left: 120px;
+    color: black;
 	 
  }
   #subtitle{
@@ -48,6 +50,7 @@ a{
 	position: absolute;
 	top:90px;
 	left:350px;
+	color:black;
  }
   nav{
 	position: absolute;
