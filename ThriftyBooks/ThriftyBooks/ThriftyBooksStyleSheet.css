@@ -1,13 +1,92 @@
-﻿body {
-    margin:0 auto;
-    background-image: url(background.jpg);
-    background-repeat: no-repeat;
+﻿/* Kunwal's Css */
+body {
+    background-image : url("uhedit.jpg");
+	background-position: left;
+	background-repeat : repeat;
+	background-size : 100%;
+	margin: 0 auto;
+	font-family: Arial, 'Lucida Sans Unicode';
+	text-align: left;
+	line-height: 1.5;
+	font-size: 87.5%;
+	color: #000385;	
 }
 
+.body{
+	margin: 0 auto;
+	width: 100%;
+	}
+a{
+	text-decoration: none;
+}
+
+ .mainheader{
+	 background-color: red;
+	 height:150px;
+	 margin-top:-15px;
+	position: relative;
+	
+ }
+ 
+ #book_img {
+	position: relative;
+    height: 300px;
+    width: auto;
+    left: 28px;
+    bottom: 58px;
+ }
+ 
+  #title{
+	 font-size:27px;
+	 position: absolute;
+	 top: 30px;
+	 left: 120px;
+	 
+ }
+  #subtitle{
+	font-size: 15px;
+	position: absolute;
+	top:90px;
+	left:350px;
+ }
+  nav{
+	position: absolute;
+	right:20px;
+	top:20px;
+ }	
+ 
+ nav a{
+	color:black;
+ }	
+ 
+ 
+ @media only screen and (min-width: 150px) and (max-width: 600px)
+ {
+	
+ #title{
+	 font-size:25px;
+	 position: absolute;
+	 left: 45px;
+}
+ #subtitle{
+	font-size: 14px;
+	position: absolute;
+	top:90px;
+	left:167px;
+ }
+ 
+ 	 
+ }
+ 
+ /* Original Css*/
 Table {
     margin-bottom: 15px;
 }
 
 button {
     margin-top: 0px;
+}
+
+#btnExpandNew2 {
+    margin-bottom: 20px;
 }
