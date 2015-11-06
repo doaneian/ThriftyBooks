@@ -32,9 +32,10 @@ a{
 	position: relative;
     height: 300px;
     width: auto;
-    left: 28px;
-    bottom: 58px;
- }
+    left: 67px;
+    bottom: 282px;
+    margin-top: 20px;
+}
  
   #title{
 	font-weight: bold;
@@ -84,6 +85,7 @@ a{
  /* Original Css*/
 Table {
     margin-bottom: 15px;
+    margin-left: 0px;
 }
 
 button {
