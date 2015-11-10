@@ -11,7 +11,7 @@ namespace Thrifty {
     
     
     public partial class ThriftyBooks {
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -92,5 +92,49 @@ namespace Thrifty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnExpandNew2;
+
+        protected global::System.Web.UI.WebControls.Table bookResult;
+
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow1;
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow2;
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow3;
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow4;
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow5;
+        protected global::System.Web.UI.WebControls.TableRow bookResultRow6;
+
+        protected global::System.Web.UI.WebControls.Image bookImage1;
+        protected global::System.Web.UI.WebControls.Image bookImage2;
+        protected global::System.Web.UI.WebControls.Image bookImage3;
+        protected global::System.Web.UI.WebControls.Image bookImage4;
+        protected global::System.Web.UI.WebControls.Image bookImage5;
+        protected global::System.Web.UI.WebControls.Image bookImage6;
+
+        protected global::System.Web.UI.WebControls.Label lTitle1;
+        protected global::System.Web.UI.WebControls.Label lTitle2;
+        protected global::System.Web.UI.WebControls.Label lTitle3;
+        protected global::System.Web.UI.WebControls.Label lTitle4;
+        protected global::System.Web.UI.WebControls.Label lTitle5;
+        protected global::System.Web.UI.WebControls.Label lTitle6;
+
+        protected global::System.Web.UI.WebControls.Label lAuthor1;
+        protected global::System.Web.UI.WebControls.Label lAuthor2;
+        protected global::System.Web.UI.WebControls.Label lAuthor3;
+        protected global::System.Web.UI.WebControls.Label lAuthor4;
+        protected global::System.Web.UI.WebControls.Label lAuthor5;
+        protected global::System.Web.UI.WebControls.Label lAuthor6;
+
+        protected global::System.Web.UI.WebControls.Label lEdition1;
+        protected global::System.Web.UI.WebControls.Label lEdition2;
+        protected global::System.Web.UI.WebControls.Label lEdition3;
+        protected global::System.Web.UI.WebControls.Label lEdition4;
+        protected global::System.Web.UI.WebControls.Label lEdition5;
+        protected global::System.Web.UI.WebControls.Label lEdition6;
+
+        protected global::System.Web.UI.WebControls.Label lISBN1;
+        protected global::System.Web.UI.WebControls.Label lISBN2;
+        protected global::System.Web.UI.WebControls.Label lISBN3;
+        protected global::System.Web.UI.WebControls.Label lISBN4;
+        protected global::System.Web.UI.WebControls.Label lISBN5;
+        protected global::System.Web.UI.WebControls.Label lISBN6;
     }
 }

@@ -11,7 +11,7 @@ using System.Xml.Linq;
 namespace Thrifty
 {
     public enum condition { eRent = 0, eUsed, eNew };
-    public enum returnCodes { eSuccess = 0, eFail = -1 }
+    public enum returnCodes { eSuccess = 0, eFail = -1, eNoResults = 2, eNoSearchTerm = 3, eInvalidISBN = 4 }
     public enum tableStatusCode { eEmpty = 0, eInitial, eExpanded }
     public enum searchBy { eISBN = 0, eTitle, eAuthor }
 
@@ -22,12 +22,21 @@ namespace Thrifty
         string sourceName;
         double price;
         string link;
+        double days;
 
         public SourceNode(string sourceName, double price, string link)
         {
             this.sourceName = sourceName;
             this.price = price;
             this.link = link;
+        }
+
+        public SourceNode(string sourceName, double price, string link, double days)
+        {
+            this.sourceName = sourceName;
+            this.price = price;
+            this.link = link;
+            this.days = days;
         }
 
         public SourceNode getNext()
@@ -55,6 +64,11 @@ namespace Thrifty
             this.next = next;
         }
 
+        public double getDays()
+        {
+            return days;
+        }
+
         public void setSourceName(string sourceName)
         {
             this.sourceName = sourceName;
@@ -73,8 +87,6 @@ namespace Thrifty
 
     public class Search
     {
-        int ISBN;
-
         public int getResults(string searchTerm, int searchType)
         {
             ValidateSearchTerm validate = new ValidateSearchTerm();
@@ -82,7 +94,6 @@ namespace Thrifty
             int rc = validate.CheckInput(searchTerm);
             if (rc != (int)returnCodes.eSuccess)
             {
-                giveError(rc);
                 return rc;
             }
 
@@ -90,11 +101,6 @@ namespace Thrifty
             rc = apiCaller.callAPIs(searchTerm, searchType);
 
             return rc;
-        }
-
-        public void giveError(int rc)
-        {
-
         }
     }
 
@@ -141,10 +147,9 @@ namespace Thrifty
             return false;
         }
 
-        public void insertNode(string sourceName, double price, string link)
+        public void insertNode(SourceNode insertNode)
         {
             SourceNode pointer = head;
-            SourceNode insertNode = new SourceNode(sourceName, price, link);
 
             while (pointer.getNext() != null)
             {
@@ -169,33 +174,103 @@ namespace Thrifty
         }
     }
 
+    public class bookInfo
+    {
+        public bookInfo next;
+
+        public long ISBN13;
+        public string bookName;
+        public string author;
+        public string edition;
+        public string bookImage;
+        
+        public bookInfo(long ISBN13, string bookName, string author, string edition, string bookImage)
+        {
+            this.ISBN13 = ISBN13;
+            this.bookName = bookName;
+            this.author = author;
+            this.edition = edition;
+            this.bookImage = bookImage;
+        }
+    }
+
+    public class bookInfoList
+    {
+        bookInfo head = new bookInfo(0, "", "", "", "");
+
+        public bookInfo getEndNode()
+        {
+            bookInfo end = head;
+            while(end.next != null)
+            {
+                end = end.next;
+            }
+
+            return end;
+        }
+        
+        public void insertNode(long ISBN13, string bookName, string author, string edition, string bookImage)
+        {
+            bookInfo end = getEndNode();
+            end.next = new bookInfo(ISBN13, bookName, author, edition, bookImage);
+        }
+
+        public bookInfo getNodeAt(int index)
+        {
+            bookInfo returnNode = head;
+            for(int i = 0; i < index; i++)
+            {
+                returnNode = returnNode.next;
+            }
+
+            return returnNode;
+        }
+
+        public bookInfo selectNodeAt(int index)
+        {
+            bookInfo selectedNode = getNodeAt(index);
+            bookInfo previousNode = getNodeAt(index - 1);
+
+            //Move selected node to the front of the list
+            previousNode.next = selectedNode.next;
+            selectedNode.next = head.next;
+            head.next = selectedNode;
+
+            //Call API to get prices for node
+            CampusBooksAPI campusBooks = new CampusBooksAPI();
+            campusBooks.callCampusBooksAPI(selectedNode.ISBN13);
+
+            return selectedNode;
+        }
+
+        public void deleteList()
+        {
+            head.next = null;
+        }
+    }
+
     public class APICaller
     {
         public int callAPIs(string searchTerm, int searchType)
         {
             CampusBooksAPI campusBooks = new CampusBooksAPI();
-            campusBooks.callCampusBooksAPI(searchTerm, searchType);
+            int rc = campusBooks.search(searchTerm, searchType);
 
-            return (int)returnCodes.eSuccess;
+            return rc;
         }
     }
 
     public class CampusBooksAPI
     {
-        public int callCampusBooksAPI(string searchTerm, int searchType)
+        public int callCampusBooksAPI(long ISBN)
         {
             string key = "tBelKTdZHebtuwvSNKu";
             string getString = "";
-            long ISBN = 0;
 
-            if (searchType == (int)searchBy.eISBN)
-            {
-                ISBN = long.Parse(searchTerm);
-            }
-            else
-            {
-                ISBN = getISBN(searchTerm, searchType);
-            }
+            ISBN = Main.bookList.getNodeAt(1).ISBN13;
+            Main.rentList.deleteList();
+            Main.usedList.deleteList();
+            Main.newList.deleteList();
 
             getString = string.Format("http://api2.campusbooks.com/12/rest/prices?key={0}&isbn={1}", key, ISBN);
 
@@ -220,13 +295,28 @@ namespace Thrifty
                     double price = double.Parse((string)offerElement.Element("total_price"));
                     string link = (string)offerElement.Element("link");
                     int conditionElementID = (int)conditionElement.Attribute("id");
+                    XElement rentals = offerElement.Element("rental_detail");
+                    if (rentals != null)
+                    {
+                        XElement rental = rentals.Element("rental");
+                        if (Main.rentList == null)
+                        {
+                            Main.rentList = new SourceList();
+                        }
+
+                        double rentPrice = double.Parse((string)rental.Element("price"));
+                        string rentLink = (string)rental.Element("link");
+                        double days = double.Parse((string)rental.Element("days"));
+                        Main.rentList.insertNode(new SourceNode(sourceName, rentPrice, rentLink, days));
+
+                    }
                     if (conditionElementID == 1)
                     {
                         if (Main.newList == null)
                         {
                             Main.newList = new SourceList();
                         }
-                        Main.newList.insertNode(sourceName, price, link);
+                        Main.newList.insertNode(new SourceNode(sourceName, price, link));
                         Main.tableStatus[(int)condition.eNew] = (int)tableStatusCode.eInitial;
                     }
                     else if (conditionElementID == 2)
@@ -235,7 +325,7 @@ namespace Thrifty
                         {
                             Main.usedList = new SourceList();
                         }
-                        Main.usedList.insertNode(sourceName, price, link);
+                        Main.usedList.insertNode(new SourceNode(sourceName, price, link));
                         Main.tableStatus[(int)condition.eUsed] = (int)tableStatusCode.eInitial;
                     }
                     else if (conditionElementID == 3)
@@ -244,7 +334,7 @@ namespace Thrifty
                         {
                             Main.rentList = new SourceList();
                         }
-                        Main.rentList.insertNode(sourceName, price, link);
+                        Main.rentList.insertNode(new SourceNode(sourceName, price, link));
                         Main.tableStatus[(int)condition.eRent] = (int)tableStatusCode.eInitial;
                     }
                 }
@@ -253,11 +343,15 @@ namespace Thrifty
             return (int)returnCodes.eSuccess;
         }
 
-        public long getISBN(string searchTerm, int searchType)
+        public int search(string searchTerm, int searchType)
         {
             string getString = "";
             string key = "tBelKTdZHebtuwvSNKu";
 
+            if (searchType == (int)searchBy.eISBN)
+            {
+                getString = string.Format("http://api2.campusbooks.com/12/rest/bookinfo?key={0}&isbn={1}", key, searchTerm);
+            }
             if (searchType == (int)searchBy.eTitle)
             {
                 getString = string.Format("http://api2.campusbooks.com/12/rest/search?key={0}&title={1}", key, searchTerm);
@@ -277,15 +371,53 @@ namespace Thrifty
             XElement responseElement = bookInfoResponseReader.Element("response");
             if ((string)responseElement.Attribute("status") != "ok")
             {
+                if(responseElement.Element("errors") != null)
+                {
+                    if((string)responseElement.Element("errors").Element("error") == "Invalid ISBN")
+                    {
+                        return (int)returnCodes.eInvalidISBN;
+                    }
+                }
                 return (int)returnCodes.eFail;
             }
             if ((int)responseElement.Element("page").Element("count") == 0)
             {
-                return (int)returnCodes.eFail;
+                return (int)returnCodes.eNoResults;
             }
 
-            XElement bookElement = responseElement.Element("page").Element("results").Element("book");
-            return (long)bookElement.Element("isbn13");
+            if (Main.bookList == null)
+            {
+                Main.bookList = new bookInfoList();
+            }
+
+            Main.bookList.deleteList();
+
+            if (searchType == (int)searchBy.eISBN)
+            {
+                foreach (XElement bookElement in responseElement.Elements("page"))
+                {
+                    long ISBN13 = (long)bookElement.Element("isbn13");
+                    string bookName = (string)bookElement.Element("title");
+                    string author = (string)bookElement.Element("author");
+                    string edition = (string)bookElement.Element("edition");
+                    string bookImage = (string)bookElement.Element("image");
+                    Main.bookList.insertNode(ISBN13, bookName, author, edition, bookImage);
+                }
+            }
+            else
+            {
+                foreach (XElement bookElement in responseElement.Element("page").Element("results").Elements("book"))
+                {
+                    long ISBN13 = (long)bookElement.Element("isbn13");
+                    string bookName = (string)bookElement.Element("title");
+                    string author = (string)bookElement.Element("author");
+                    string edition = (string)bookElement.Element("edition");
+                    string bookImage = (string)bookElement.Element("image");
+                    Main.bookList.insertNode(ISBN13, bookName, author, edition, bookImage);
+                }
+            }
+
+            return (int)returnCodes.eSuccess;
         }
     }
 
@@ -295,7 +427,7 @@ namespace Thrifty
         {
             if(searchTerm == "")
             {
-                return (int)returnCodes.eFail;
+                return (int)returnCodes.eNoSearchTerm;
             }
 
             return (int)returnCodes.eSuccess;
@@ -308,6 +440,8 @@ namespace Thrifty
         public static SourceList usedList;
         public static SourceList newList;
 
+        public static bookInfoList bookList;
+
         public static int ISBN;
         public static int[] tableStatus = new int[3] { 0, 0, 0 };
 
@@ -317,8 +451,6 @@ namespace Thrifty
         {
             this.formHandler = formHandler;
         }
-
-
 
         public void expandRentTable()
         {
@@ -340,15 +472,56 @@ namespace Thrifty
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Main.newList == null || Main.usedList == null || Main.rentList == null)
+            string target = Request["__EVENTTARGET"];
+            if(target == "bookResult")
+            {
+                viewMoreBooks();
+            }
+
+            if(target == "selectResult1")
+            {
+                insertInitialResultsIntoTables();
+            }
+
+            if (target == "selectResult2")
+            {
+                Main.bookList.selectNodeAt(2);
+                insertInitialResultsIntoTables();
+            }
+
+            if (target == "selectResult3")
+            {
+                Main.bookList.selectNodeAt(3);
+                insertInitialResultsIntoTables();
+            }
+
+            if (target == "selectResult4")
+            {
+                Main.bookList.selectNodeAt(4);
+                insertInitialResultsIntoTables();
+            }
+
+            if (target == "selectResult5")
+            {
+                Main.bookList.selectNodeAt(5);
+                insertInitialResultsIntoTables();
+            }
+
+            if (Main.newList == null || Main.usedList == null || Main.rentList == null)
             {
                 btnExpandRent2.Visible = false;
                 btnExpandUsed2.Visible = false;
                 btnExpandNew2.Visible = false;
-
-                rbISBN.Checked = true;
-                txtbxSearchTerm.Text = "";
             }
+        }
+
+        public void Show(String Message)
+        {
+            ClientScript.RegisterStartupScript(
+               Page.GetType(),
+               "MessageBox",
+               "<script language='javascript'>alert('" + Message + "');</script>"
+            );
         }
 
         protected void SearchEvent(object sender, EventArgs e)
@@ -376,16 +549,88 @@ namespace Thrifty
             resetLists();
 
             Search search = new Search();
-            search.getResults(searchTerm, type);
+            int rc = search.getResults(searchTerm, type);
+            if(rc != (int)returnCodes.eSuccess)
+            {
+                giveError(rc);
+                return;
+            }
 
             insertInitialResultsIntoTables();
         }
 
+        public void giveError(int rc)
+        {
+            if(rc == (int)returnCodes.eNoResults)
+            {
+                Show("No results were found");
+                bookResult.Visible = false;
+                btnExpandRent2.Visible = false;
+                btnExpandUsed2.Visible = false;
+                btnExpandNew2.Visible = false;
+            }
+
+            if(rc == (int)returnCodes.eNoSearchTerm)
+            {
+                Show("Please enter a search term");
+                bookResult.Visible = false;
+                btnExpandRent2.Visible = false;
+                btnExpandUsed2.Visible = false;
+                btnExpandNew2.Visible = false;
+            }
+
+            if(rc == (int)returnCodes.eInvalidISBN)
+            {
+                Show("Please enter a valid ISBN");
+                bookResult.Visible = false;
+                btnExpandRent2.Visible = false;
+                btnExpandUsed2.Visible = false;
+                btnExpandNew2.Visible = false;
+            }
+        }
+
         public void insertInitialResultsIntoTables()
         {
+            showCurrentBook(false);
             buildTable((int)condition.eRent);
             buildTable((int)condition.eUsed);
             buildTable((int)condition.eNew);
+        }
+
+        public void expandBooks(object sender, EventArgs e)
+        {
+
+        }
+
+        public void removeAllBookResultRows()
+        {
+            for (int i = 1; i <= 6; i++)
+            {
+                bookResult.Controls.Remove(getBookResultRow(i));
+            }
+        }
+
+        public void showCurrentBook(bool expanding)
+        {
+            bookInfo currentBook;
+            if (!expanding)
+            {
+                currentBook = Main.bookList.selectNodeAt(1);
+            }
+            else
+            {
+                currentBook = Main.bookList.getNodeAt(1);
+            }
+
+            removeAllBookResultRows();
+
+            bookResult.Visible = true;
+            bookResult.Controls.Add(getBookResultRow(1));
+            getImage(1).ImageUrl = currentBook.bookImage;
+            getTitle(1).Text = currentBook.bookName;
+            getAuthor(1).Text = currentBook.author;
+            getEdition(1).Text = "Edition: " + currentBook.edition;
+            getISBN(1).Text = "ISBN: " + currentBook.ISBN13;
         }
 
         public void resetLists()
@@ -461,6 +706,7 @@ namespace Thrifty
 
         public void expandNewTable()
         {
+            showCurrentBook(true);
             refreshTable((int)condition.eRent);
             refreshTable((int)condition.eUsed);
             expandTable((int)condition.eNew);
@@ -468,6 +714,7 @@ namespace Thrifty
 
         public void expandUsedTable()
         {
+            showCurrentBook(true);
             refreshTable((int)condition.eRent);
             expandTable((int)condition.eUsed);
             refreshTable((int)condition.eNew);
@@ -475,6 +722,7 @@ namespace Thrifty
 
         public void expandRentTable()
         {
+            showCurrentBook(true);
             expandTable((int)condition.eRent);
             refreshTable((int)condition.eUsed);
             refreshTable((int)condition.eNew);
@@ -486,6 +734,7 @@ namespace Thrifty
             {
                 return;
             }
+
             Table table = new Table();
             setTableStyle(table);
 
@@ -526,19 +775,254 @@ namespace Thrifty
             Main.tableStatus[type] = (int)tableStatusCode.eInitial;
         }
 
+        public void viewMoreBooks()
+        {
+            btnExpandRent2.Visible = false;
+            btnExpandUsed2.Visible = false;
+            btnExpandNew2.Visible = false;
+
+            removeAllBookResultRows();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                bookInfo currentBook = Main.bookList.getNodeAt(i);
+                if(currentBook == null)
+                {
+                    return;
+                }
+
+                bookResult.Controls.Add(getBookResultRow(i + 1));
+                getImage(i + 1).ImageUrl = currentBook.bookImage;
+                getTitle(i + 1).Text = currentBook.bookName;
+                getAuthor(i + 1).Text = currentBook.author;
+                getEdition(i + 1).Text = "Edition: " + currentBook.edition;
+                getISBN(i + 1).Text = "ISBN: " + currentBook.ISBN13;
+            }
+        }
+
+        public TableRow getBookResultRow(int i)
+        {
+            if (i == 1)
+            {
+                return bookResultRow1;
+            }
+
+            if (i == 2)
+            {
+                return bookResultRow2;
+            }
+
+            if (i == 3)
+            {
+                return bookResultRow3;
+            }
+
+            if (i == 4)
+            {
+                return bookResultRow4;
+            }
+
+            if (i == 5)
+            {
+                return bookResultRow5;
+            }
+
+            if (i == 6)
+            {
+                return bookResultRow6;
+            }
+
+            return null;
+        }
+
+        public Image getImage(int i)
+        {
+            if(i == 1)
+            {
+                return bookImage1;
+            }
+
+            if (i == 2)
+            {
+                return bookImage2;
+            }
+
+            if (i == 3)
+            {
+                return bookImage3;
+            }
+
+            if (i == 4)
+            {
+                return bookImage4;
+            }
+
+            if (i == 5)
+            {
+                return bookImage5;
+            }
+
+            if (i == 6)
+            {
+                return bookImage6;
+            }
+
+            return null;
+        }
+
+        public Label getTitle(int i)
+        {
+            if (i == 1)
+            {
+                return lTitle1;
+            }
+
+            if (i == 2)
+            {
+                return lTitle2;
+            }
+
+            if (i == 3)
+            {
+                return lTitle3;
+            }
+
+            if (i == 4)
+            {
+                return lTitle4;
+            }
+
+            if (i == 5)
+            {
+                return lTitle5;
+            }
+
+            if (i == 6)
+            {
+                return lTitle6;
+            }
+
+            return null;
+        }
+
+        public Label getAuthor(int i)
+        {
+            if (i == 1)
+            {
+                return lAuthor1;
+            }
+
+            if (i == 2)
+            {
+                return lAuthor2;
+            }
+
+            if (i == 3)
+            {
+                return lAuthor3;
+            }
+
+            if (i == 4)
+            {
+                return lAuthor4;
+            }
+
+            if (i == 5)
+            {
+                return lAuthor5;
+            }
+
+            if (i == 6)
+            {
+                return lAuthor6;
+            }
+
+            return null;
+        }
+
+        public Label getEdition(int i)
+        {
+            if (i == 1)
+            {
+                return lEdition1;
+            }
+
+            if (i == 2)
+            {
+                return lEdition2;
+            }
+
+            if (i == 3)
+            {
+                return lEdition3;
+            }
+
+            if (i == 4)
+            {
+                return lEdition4;
+            }
+
+            if (i == 5)
+            {
+                return lEdition5;
+            }
+
+            if (i == 6)
+            {
+                return lEdition6;
+            }
+
+            return null;
+        }
+
+        public Label getISBN(int i)
+        {
+            if (i == 1)
+            {
+                return lISBN1;
+            }
+
+            if (i == 2)
+            {
+                return lISBN2;
+            }
+
+            if (i == 3)
+            {
+                return lISBN3;
+            }
+
+            if (i == 4)
+            {
+                return lISBN4;
+            }
+
+            if (i == 5)
+            {
+                return lISBN5;
+            }
+
+            if (i == 6)
+            {
+                return lISBN6;
+            }
+
+            return null;
+        }
+
         public void addTableToForm(int type, Table table)
         {
             if (type == (int)condition.eRent)
             {
-                form1.Controls.AddAt(11, table);
+                form1.Controls.AddAt(13, table);
             }
             if (type == (int)condition.eUsed)
             {
-                form1.Controls.AddAt(14, table);
+                form1.Controls.AddAt(16, table);
             }
             if (type == (int)condition.eNew)
             {
-                form1.Controls.AddAt(17, table);
+                form1.Controls.AddAt(19, table);
             }
         }
 
@@ -551,10 +1035,44 @@ namespace Thrifty
             header.Text = getTableHeaderText(type);
             header.BorderStyle = BorderStyle.Solid;
             header.BorderWidth = Unit.Pixel(1);
-            header.ColumnSpan = 2;
+            if (type == (int)condition.eRent)
+            {
+                header.ColumnSpan = 3;
+            }
+            else
+            {
+                header.ColumnSpan = 2;
+            }
             header.HorizontalAlign = HorizontalAlign.Center;
             header.Font.Size = FontUnit.Point(20);
             tHeaderRow.Controls.Add(header);
+
+            TableRow columnLabels = new TableRow();
+            table.Controls.Add(columnLabels);
+
+            TableCell sourceLabel = new TableCell();
+            columnLabels.Controls.Add(sourceLabel);
+            sourceLabel.Font.Size = 14;
+            sourceLabel.BorderStyle = BorderStyle.Solid;
+            sourceLabel.BorderWidth = Unit.Pixel(1);
+            sourceLabel.Text = "Source";
+
+            if(type == (int)condition.eRent)
+            {
+                TableCell rentalPeriod = new TableCell();
+                columnLabels.Controls.Add(rentalPeriod);
+                rentalPeriod.BorderStyle = BorderStyle.Solid;
+                rentalPeriod.BorderWidth = Unit.Pixel(1);
+                rentalPeriod.Font.Size = 14;
+                rentalPeriod.Text = "Rental\nPeriod";
+            }
+
+            TableCell priceLabel = new TableCell();
+            columnLabels.Controls.Add(priceLabel);
+            priceLabel.BorderStyle = BorderStyle.Solid;
+            priceLabel.BorderWidth = Unit.Pixel(1);
+            priceLabel.Font.Size = 14;
+            priceLabel.Text = "Price";
         }
 
         public string getTableHeaderText(int type)
@@ -595,6 +1113,14 @@ namespace Thrifty
             image.ImageUrl = node.getSourceName();
             setSourceCellStyle(source);
 
+            if(type == (int)condition.eRent)
+            {
+                TableCell daysRented = new TableCell();
+                trow.Controls.Add(daysRented);
+                setDaysCellStyle(daysRented);
+                daysRented.Text = node.getDays() + " days";
+            }
+
             TableCell price = new TableCell();
             HyperLink link = new HyperLink();
             link.NavigateUrl = node.getLink();
@@ -631,7 +1157,7 @@ namespace Thrifty
             table.CellSpacing = 0;
             table.Visible = true;
             table.CellPadding = 5;
-            table.Width = 200;
+            table.Width = 300;
             table.BackColor = System.Drawing.Color.White;
         }
 
@@ -641,6 +1167,12 @@ namespace Thrifty
             source.BorderWidth = Unit.Pixel(1);
             source.Height = 60;
             source.Width = 60;
+        }
+
+        public void setDaysCellStyle(TableCell days)
+        {
+            days.BorderStyle = BorderStyle.Solid;
+            days.BorderWidth = Unit.Pixel(1);
         }
 
         public void setPriceCellStyle(TableCell price)
