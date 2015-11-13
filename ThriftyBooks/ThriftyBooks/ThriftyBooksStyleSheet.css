@@ -6,8 +6,7 @@ body {
 	text-align: left;
 	line-height: 1.5;
 	font-size: 87.5%;
-	color: #000385;
-    background-color:aquamarine
+    background-color:#00BCD4
 }
 
 .body{
@@ -44,6 +43,10 @@ a{
     color: black;
 	 
  }
+ 
+ #title a{
+	color:black;
+}
   #subtitle{
 	font-size: 15px;
 	position: absolute;
@@ -70,6 +73,8 @@ a{
 	 position: absolute;
 	 left: 45px;
 }
+
+
  #subtitle{
 	font-size: 14px;
 	position: absolute;
@@ -80,6 +85,23 @@ a{
  	 
  }
  
+.auto-style3 img{
+	float:right;
+}
+
+#Instagram{
+	    margin-top: 57px;
+    height: 54px;
+    width: 55px;
+    margin-right: -54px;
+}
+
+#Twitter{
+	    margin-top: 107px;
+    width: 57px;
+    margin-right: -55px;
+    height: 54px;
+}
  /* Original Css*/
 Table {
     margin-bottom: 15px;

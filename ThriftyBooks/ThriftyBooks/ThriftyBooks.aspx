@@ -49,12 +49,9 @@
         </style>
     </head>
 <header class="auto-style4">
-    <p id="title">THRIFTYBOOKS.com<p>
+    <p id="title"><a href="http://www.google.com" > THRIFTYBOOKS.com</a><p>
     <p id="subtitle"><i>Right place to find books</i></p>
-    <nav>
-        <a href = "http://www.google.com">Home</a>
-        <a href="http://www.facebook.com">Login</a>
-    </nav>
+    
 </header>
 <body class="body">
     <center>
@@ -63,13 +60,9 @@
             <td class="auto-style12">
                 <table>
                     <tr>
-                        <td colspan="3"><asp:Image ID="Image1" runat="server" ImageUrl="book.png" Width="200px" /></td>
+                        <td colspan="3"><asp:Image ID="Image1" runat="server" ImageUrl="laptopbook.png" Width="205px"  style="margin-top: 70px;" /></td>
                     </tr>
-                    <tr>
-                        <td><a href="http://www.facebook.com" target="_blank"><asp:Image ID="Facebook" runat="server" ImageUrl="~/facebook.jpg" Width="55px" /></a></td>
-                        <td><a href="http://www.instagram.com" target="_blank"><asp:Image ID="Instagram" runat="server" ImageURL="~/instagram.jpg" Width="55px" Height="54px" /></a></td>
-                        <td><a href="http://www.twitter.com" target="_blank"><asp:Image ID="Twitter" runat="server" ImageUrl="Twitter.png" Width="66px" /></a></td>
-                    </tr>
+                    
                 </table>             
             </td>
             <td class="auto-style2"></td>
@@ -168,7 +161,16 @@
             </div>
             </form>
             </td>
-            <td class="auto-style3"></td>
+            <td class="auto-style3">
+                
+                        <a href="http://www.facebook.com" target="_blank"><asp:Image ID="Facebook" runat="server" ImageUrl="~/facebook.jpg" Width="55px" /></a>
+                        <br/>
+                        <a href="http://www.instagram.com" target="_blank"><asp:Image ID="Instagram" runat="server" ImageURL="~/instagram.jpg" Width="55px" Height="54px" /></a>
+                        <br />
+                        <a href="http://www.twitter.com" target="_blank"><asp:Image ID="Twitter" runat="server" ImageUrl="Twitter.png" Width="55px" /></a>
+                    
+
+            </td>
         </tr>
         </table>
     </center>

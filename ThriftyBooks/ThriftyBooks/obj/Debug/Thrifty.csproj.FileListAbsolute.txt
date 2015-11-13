@@ -18,3 +18,43 @@ E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\bi
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.dll
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.pdb
 E:\Our Documents\School\Senior Project\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\Thrifty.csprojResolveAssemblyReference.cache
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\csc.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\vbc.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll.config
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.pdb
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\Thrifty.csprojResolveAssemblyReference.cache
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.pdb
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\csc.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\vbc.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll.config
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\ThriftyBooks.pdb
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\obj\Debug\Thrifty.csprojResolveAssemblyReference.cache
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.dll
+C:\Users\ujjwal kunwar\Desktop\ThriftyBooks --latest copy #github\ThriftyBooks\ThriftyBooks\obj\Debug\ThriftyBooks.pdb
