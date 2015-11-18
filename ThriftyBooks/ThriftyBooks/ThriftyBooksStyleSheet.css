@@ -78,9 +78,15 @@ a{
  }
  
  /* Original Css*/
-Table {
+table {
     margin-bottom: 15px;
     margin-left: 0px;
+	border-spacing:0px;
+
+}
+
+td {
+padding:0px;
 }
 
 button {
