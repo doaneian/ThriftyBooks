@@ -473,7 +473,8 @@ namespace Thrifty
         protected void Page_Load(object sender, EventArgs e)
         {
             string target = Request["__EVENTTARGET"];
-            if(target == "bookResult")
+            searchBarTable.HorizontalAlign = HorizontalAlign.Center;
+            if (target == "bookResult")
             {
                 viewMoreBooks();
             }
@@ -540,6 +541,10 @@ namespace Thrifty
             {
                 searchType = (int)searchBy.eAuthor;
             }
+
+            form1.Controls.Remove(btnExpandRent2);
+            form1.Controls.Remove(btnExpandUsed2);
+            form1.Controls.Remove(btnExpandNew2);
 
             ProcessSearchTerm(txtbxSearchTerm.Text, searchType);
         }
@@ -623,8 +628,9 @@ namespace Thrifty
             }
 
             removeAllBookResultRows();
+            setTableStyle(bookResult);
 
-            bookResult.Visible = true;
+            //bookResult.Visible = true;
             bookResult.Controls.Add(getBookResultRow(1));
             getImage(1).ImageUrl = currentBook.bookImage;
             getTitle(1).Text = currentBook.bookName;
@@ -748,6 +754,7 @@ namespace Thrifty
                 insertDataRow(i, type, table);
             }
 
+            addButtonToTable(table, type);
             addTableToForm(type, table);
 
             Main.tableStatus[type] = (int)tableStatusCode.eExpanded;
@@ -769,10 +776,36 @@ namespace Thrifty
 
             setTableHeader(type, table);
             insertDataRow(1, type, table);
+            addButtonToTable(table, type);
 
             addTableToForm(type, table);
 
             Main.tableStatus[type] = (int)tableStatusCode.eInitial;
+        }
+
+        public void addButtonToTable(Table table, int type)
+        {
+            TableRow buttonRow = new TableRow();
+            table.Controls.Add(buttonRow);
+            TableCell buttonCell = new TableCell();
+            buttonRow.Controls.Add(buttonCell);
+            buttonCell.HorizontalAlign = HorizontalAlign.Center;
+
+            if (type == (int)condition.eRent)
+            {
+                buttonCell.ColumnSpan = 3;
+                buttonCell.Controls.Add(btnExpandRent2);
+            }
+            else if (type == (int)condition.eUsed)
+            {
+                buttonCell.ColumnSpan = 2;
+                buttonCell.Controls.Add(btnExpandUsed2);
+            }
+            else if (type == (int)condition.eNew)
+            {
+                buttonCell.ColumnSpan = 2;
+                buttonCell.Controls.Add(btnExpandNew2);
+            }
         }
 
         public void viewMoreBooks()
@@ -782,6 +815,7 @@ namespace Thrifty
             btnExpandNew2.Visible = false;
 
             removeAllBookResultRows();
+            setTableStyle(bookResult);
 
             for (int i = 1; i <= 5; i++)
             {
@@ -1014,15 +1048,15 @@ namespace Thrifty
         {
             if (type == (int)condition.eRent)
             {
-                form1.Controls.AddAt(13, table);
+                form1.Controls.AddAt(10, table);
             }
             if (type == (int)condition.eUsed)
             {
-                form1.Controls.AddAt(16, table);
+                form1.Controls.AddAt(11, table);
             }
             if (type == (int)condition.eNew)
             {
-                form1.Controls.AddAt(19, table);
+                form1.Controls.AddAt(12, table);
             }
         }
 
@@ -1030,6 +1064,8 @@ namespace Thrifty
         {
             TableRow tHeaderRow = new TableRow();
             table.Controls.Add(tHeaderRow);
+
+            tHeaderRow.BackColor = System.Drawing.Color.LightBlue;
 
             TableCell header = new TableCell();
             header.Text = getTableHeaderText(type);
@@ -1055,6 +1091,7 @@ namespace Thrifty
             sourceLabel.Font.Size = 14;
             sourceLabel.BorderStyle = BorderStyle.Solid;
             sourceLabel.BorderWidth = Unit.Pixel(1);
+            sourceLabel.HorizontalAlign = HorizontalAlign.Center;
             sourceLabel.Text = "Source";
 
             if(type == (int)condition.eRent)
@@ -1064,7 +1101,8 @@ namespace Thrifty
                 rentalPeriod.BorderStyle = BorderStyle.Solid;
                 rentalPeriod.BorderWidth = Unit.Pixel(1);
                 rentalPeriod.Font.Size = 14;
-                rentalPeriod.Text = "Rental\nPeriod";
+                rentalPeriod.HorizontalAlign = HorizontalAlign.Center;
+                rentalPeriod.Text = "Rental Period";
             }
 
             TableCell priceLabel = new TableCell();
@@ -1072,6 +1110,7 @@ namespace Thrifty
             priceLabel.BorderStyle = BorderStyle.Solid;
             priceLabel.BorderWidth = Unit.Pixel(1);
             priceLabel.Font.Size = 14;
+            priceLabel.HorizontalAlign = HorizontalAlign.Center;
             priceLabel.Text = "Price";
         }
 
@@ -1111,6 +1150,7 @@ namespace Thrifty
             Image image = new Image();
             source.Controls.Add(image);
             image.ImageUrl = node.getSourceName();
+            image.Width = 300;
             setSourceCellStyle(source);
 
             if(type == (int)condition.eRent)
@@ -1156,8 +1196,9 @@ namespace Thrifty
         {
             table.CellSpacing = 0;
             table.Visible = true;
-            table.CellPadding = 5;
-            table.Width = 300;
+            table.CellPadding = 10;
+            table.Width = 700;
+            table.HorizontalAlign = HorizontalAlign.Center;
             table.BackColor = System.Drawing.Color.White;
         }
 
@@ -1165,20 +1206,24 @@ namespace Thrifty
         {
             source.BorderStyle = BorderStyle.Solid;
             source.BorderWidth = Unit.Pixel(1);
-            source.Height = 60;
-            source.Width = 60;
+            source.Width = 400;
+            source.HorizontalAlign = HorizontalAlign.Center;
         }
 
         public void setDaysCellStyle(TableCell days)
         {
             days.BorderStyle = BorderStyle.Solid;
             days.BorderWidth = Unit.Pixel(1);
+            days.HorizontalAlign = HorizontalAlign.Center;
+            days.Width = 150;
+            days.Font.Size = 16;
         }
 
         public void setPriceCellStyle(TableCell price)
         {
             price.BorderStyle = BorderStyle.Solid;
             price.BorderWidth = Unit.Pixel(1);
+            price.Font.Size = 16;
             price.HorizontalAlign = HorizontalAlign.Center;
         }
     }
